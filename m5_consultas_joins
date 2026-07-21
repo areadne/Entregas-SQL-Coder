@@ -3,70 +3,56 @@
 -- Esta consulta será la fuente de datos principal en Power BI.
 
 SELECT 
-	v.fecha_venta,
-	c.nombre,
-	c.ciudad,
-	p.nombre_producto,
-	cat.nombre_categoria,
-	v.cantidad,
-	v.precio_unitario,
-	v.cantidad * v.precio_unitario AS Total_facturado
+    v.fecha_venta,
+    c.nombre AS nombre_cliente,
+    c.segmento,
+    t.region,
+    p.nombre_producto,
+    cat.nombre_categoria,
+    v.cantidad,
+    v.precio_unitario,
+    (v.cantidad * v.precio_unitario) AS Total_facturado,
+    v.canal
 FROM 
-	ventas v
-JOIN
-	clientes c
-ON	
-	c.id_cliente = c.id_cliente
-JOIN
-	productos p
-ON 
-	p.id_producto = v.id_producto
-JOIN
-	categorias cat
-ON
-	cat.id_categoria = p.id_categoria;
-
+    ventas v
+INNER JOIN clientes c 
+    ON v.id_cliente = c.id_cliente
+INNER JOIN territorios t 
+    ON c.id_territorio = t.id_territorio
+INNER JOIN productos p 
+    ON v.id_producto = p.id_producto
+INNER JOIN categorias cat 
+    ON p.id_categoria = cat.id_categoria;
 
 -- Consulta 2 — Clientes sin ventas (LEFT JOIN) Identificá clientes registrados que aún no han realizado ninguna compra. Mostrá su nombre, email y fecha de registro. 
 -- Usá WHERE ... IS NULL para aislar los casos.
 
 SELECT
-	c.nombre,
-	c.email,
-	c.fecha_registro
+    c.nombre,
+    c.email,
+    c.fecha_registro
 FROM 
-	ventas v
-LEFT JOIN
-	clientes c
-ON	
-	c.id_cliente = c.id_cliente
+    clientes c
+LEFT JOIN 
+    ventas v ON c.id_cliente = v.id_cliente
 WHERE 
-	v.cantidad is NULL;
+    v.id_venta IS NULL;
 
 -- Consulta 3 — Productos sin ventas (LEFT JOIN) Identificá productos del catálogo que no tienen ninguna venta registrada. Mostrá nombre del producto, categoría y precio. 
 -- Usá WHERE ... IS NULL.
 
-
 SELECT
-	p.nombre_producto,
-	cat.nombre_categoria,
-	v.precio_unitario
+    p.nombre_producto,
+    cat.nombre_categoria,
+    p.precio_unitario
 FROM 
-	ventas v
-LEFT JOIN
-	clientes c
-ON	
-	c.id_cliente = c.id_cliente
-LEFT JOIN
-	productos p
-ON 
-	p.id_producto = v.id_producto
-LEFT JOIN
-	categorias cat
-ON
-	cat.id_categoria = p.id_categoria
+    productos p
+INNER JOIN 
+    categorias cat ON p.id_categoria = cat.id_categoria
+LEFT JOIN 
+    ventas v ON p.id_producto = v.id_producto
 WHERE 
-	v.id_producto is NULL;
+    v.id_venta IS NULL;
 
 -- Consulta 4 — Consolidado por canal (UNION ALL) Usá UNION ALL para combinar en un solo resultado las ventas Online y Presencial, 
 -- agregando una columna canal que identifique el origen de cada fila. Al final calculá el total por canal con un GROUP BY.
