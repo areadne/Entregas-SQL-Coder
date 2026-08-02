@@ -1,4 +1,4 @@
-# 🛒 RetailPro — Base de Datos Relacional y Análisis de Datos
+# RetailPro — Base de Datos Relacional y Análisis de Datos
 
 ¡Bienvenido al repositorio del proyecto **RetailPro**! 
 
@@ -6,7 +6,7 @@ Este proyecto contiene el diseño, implementación y scripts de consulta para si
 
 ---
 
-## 💡 Conceptos Clave (Para principiantes en SQL)
+## Conceptos Clave (Para principiantes en SQL)
 
 Si estás dando tus primeros pasos en el mundo de las bases de datos, estos conceptos te ayudarán a entender la estructura:
 
@@ -17,7 +17,7 @@ Si estás dando tus primeros pasos en el mundo de las bases de datos, estos conc
 
 ---
 
-## 📐 Estructura de la Base de Datos (Tablas y Atributos)
+## Estructura de la Base de Datos (Tablas y Atributos)
 
 El modelo **RetailPro** se compone de 6 tablas principales diseñadas para registrar la operación comercial:
 
@@ -30,8 +30,8 @@ El modelo **RetailPro** se compone de 6 tablas principales diseñadas para regis
 
 ```
 
-Detalle y Atributos de las Tablas
-1. clientes
+**Detalle y Atributos de las Tablas
+**1. clientes
 Descripción: Información personal y de contacto de los compradores.
 
 Atributos:
@@ -121,7 +121,7 @@ precio_unitario: Precio aplicado al momento de la venta.
 
 subtotal: Cálculo de cantidad × precio_unitario.
 
-📂 Estructura del Repositorio
+Estructura del Repositorio
 Plaintext
 Entregas-SQL-Coder/
 ├── README.md
@@ -134,10 +134,12 @@ Entregas-SQL-Coder/
 │   └── 06_triggers.sql             # Triggers de auditoría y control
 └── docs/
     └── entity_relationship_diagram.png # Diagrama Entidad-Relación (DER)
-⚙️ Guía de Ejecución de Scripts (Paso a Paso)
+
+
+**Guía de Ejecución de Scripts (Paso a Paso)**
 Para poner en marcha la base de datos en tu entorno local (ej. MySQL Workbench o DBeaver), sigue este orden secuencial.
 
-💡 ¿Por qué el orden importa? En bases de datos relacionales existen dependencias. No puedes insertar datos en una tabla que no existe, ni vincular una venta a un cliente si la tabla de clientes no se ha creado primero.
+¿Por qué el orden importa? En bases de datos relacionales existen dependencias. No puedes insertar datos en una tabla que no existe, ni vincular una venta a un cliente si la tabla de clientes no se ha creado primero.
 
 Paso 1: Clonar el repositorio
 Bash
@@ -164,8 +166,8 @@ Paso 2: Ejecutar los archivos en orden estricto
 
 ¿Qué hace?: Configura acciones automáticas que se ejecutan solas (por ejemplo, descontar el stock del producto cada vez que se inserta una fila en detalle_ventas).
 
-📈 Vistas y Reportes Disponibles
-Una vez ejecutados los scripts, puedes consultar reportes listos para análisis:
+**Vistas y Reportes Disponibles
+**Una vez ejecutados los scripts, puedes consultar reportes listos para análisis:
 
 vw_ventas_por_cliente: Muestra el historial acumulado de compras por usuario.
 
